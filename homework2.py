@@ -34,11 +34,14 @@ class Record:
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
     
     def add_phone(self, phone):
-        self.phones.append(phone)
+        self.phones.append(Phone(phone))
         # логіка для додавання номера телефону до запису
 
     def delete_phone(self, phone):
-        self.phones.remove(phone)
+        for i in range(len(self.phones)):
+            if self.phones[i].phone == phone:
+                del self.phones[i]
+                break
         # логіка для видалення номера телефону з запису
 
     def edit_phone(self, old_phone, new_phone):
