@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Book</title>
+  </head>
+  <body>
+    <h1>Address Book</h1>
+
+    <form method="POST" action="/add">
+      <input type="text" name="name" placeholder="Enter name" required />
+      <input type="text" name="phone" placeholder="Enter phone" required />
+      <button type="submit">Add Contact</button>
+    </form>
+
+    <h2>Contacts</h2>
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+      </tr>
+      {% for record in contacts.values() %}
+      <tr>
+        <td>{{ record.name.value }}</td>
+        <td>{{ record.phones[0].value }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
