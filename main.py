@@ -104,6 +104,21 @@ def delete_contact(name):
         return jsonify({"message": f"Contact {name} deleted successfully!"})
     return jsonify({"error": "Contact not found!"})
 
+@app.route('/edit/<string:name>', methods=['POST'])
+def edit_contact(name):
+    new_name = request.form.get('new_name')
+    new_phone = request.form.get('new_phone')
+    record = address_book.search_record(name)
+    if record:
+        if new_name:
+            record.name = Name(new_name)
+        if new_phone:
+            record.phones[0] = Phone(new_phone)  
+        save_to_file("contacts.json")
+        return jsonify({"message": f"Contact {name} updated successfully!"})
+    return jsonify({"error": "Contact not found!"})
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
 
