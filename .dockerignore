@@ -1,0 +1,28 @@
+# Byte-compiled / cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+
+# Environment files
+.env
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+
+# Git files
+.git
+.gitignore
+
+# Local database or generated files
+address_book.db
+contacts.json
+
+# Docker itself doesn’t need these
+Dockerfile
+docker-compose.yml
