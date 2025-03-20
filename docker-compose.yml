@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  address-book:
+    build: .
+    container_name: address-book-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./contacts.json:/app/contacts.json
+    environment:
+      - FLASK_ENV=development
+    command: gunicorn -w 4 -b 0.0.0.0:5000 main:app

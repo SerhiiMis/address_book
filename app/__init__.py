@@ -4,7 +4,7 @@ from .models import address_book
 
 app = Flask(__name__)
 
-# Load contacts on startup
+# Load contacts on app startup
 load_from_file("contacts.json")
 
 from . import routes
