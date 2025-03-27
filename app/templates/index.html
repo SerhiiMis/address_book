@@ -55,15 +55,13 @@
         <th>Phone</th>
         <th>Actions</th>
       </tr>
-      {% for record in contacts.values() %}
+      {% for record in contacts %}
       <tr>
-        <td>{{ record.name.value }}</td>
-        <td>{{ record.phones[0].value }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.phone }}</td>
         <td>
-          <button onclick="editContact('{{ record.name.value }}')">Edit</button>
-          <button onclick="deleteContact('{{ record.name.value }}')">
-            Delete
-          </button>
+          <button onclick="editContact('{{ record.name }}')">Edit</button>
+          <button onclick="deleteContact('{{ record.name }}')">Delete</button>
         </td>
       </tr>
       {% endfor %}

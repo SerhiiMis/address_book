@@ -1,10 +1,11 @@
 from flask import Flask
-from .storage import load_from_file
-from .models import address_book
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contacts.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Load contacts on app startup
-load_from_file("contacts.json")
+db = SQLAlchemy(app)
 
-from . import routes
+from . import models, routes
+

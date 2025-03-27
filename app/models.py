@@ -1,31 +1,10 @@
-from collections import UserDict
+from . import db
 
-class Field:
-    def __init__(self, value):
-        self.value = value
+class Contact(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
 
-class Name(Field):
-    pass
+    def __repr__(self):
+        return f"<Contact {self.name}: {self.phone}>"
 
-class Phone(Field):
-    def __init__(self, value):
-        super().__init__(value)
-        self.validate_phone(value)
-
-    def validate_phone(self, phone):
-        if not phone.isdigit() or len(phone) != 10:
-            raise ValueError("Phone must be a 10-digit number.")
-
-class Record:
-    def __init__(self, name):
-        self.name = Name(name)
-        self.phones = []
-
-    def add_phone(self, phone):
-        self.phones.append(Phone(phone))
-
-class AddressBook(UserDict):
-    def add_record(self, record):
-        self.data[record.name.value] = record
-
-address_book = AddressBook()
