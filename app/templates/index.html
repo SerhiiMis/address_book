@@ -4,6 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Address Book</title>
+    <script>
+      // Delete contact
+      function deleteContact(name) {
+        fetch(`/delete/${name}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert(data.message || data.error);
+            location.reload();
+          });
+      }
+
+      // Edit contact
+      function editContact(name) {
+        const newName = prompt("Enter new name:", name);
+        const newPhone = prompt("Enter new phone number:");
+        if (newName && newPhone) {
+          const formData = new FormData();
+          formData.append("new_name", newName);
+          formData.append("new_phone", newPhone);
+
+          fetch(`/edit/${name}`, {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              alert(data.message || data.error);
+              location.reload();
+            });
+        }
+      }
+    </script>
   </head>
   <body>
     <h1>Address Book</h1>
@@ -19,11 +53,18 @@
       <tr>
         <th>Name</th>
         <th>Phone</th>
+        <th>Actions</th>
       </tr>
       {% for record in contacts.values() %}
       <tr>
         <td>{{ record.name.value }}</td>
         <td>{{ record.phones[0].value }}</td>
+        <td>
+          <button onclick="editContact('{{ record.name.value }}')">Edit</button>
+          <button onclick="deleteContact('{{ record.name.value }}')">
+            Delete
+          </button>
+        </td>
       </tr>
       {% endfor %}
     </table>
